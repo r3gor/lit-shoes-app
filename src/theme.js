@@ -1,4 +1,8 @@
 export default {
+  common: {
+    // "fontFamily": "'Montserrat', sans-serif",
+    "fontFamily": "'Rubik', sans-serif",
+  },
   light: {
     "--bg": "white",
     "--c-primary": "#81d4fa",

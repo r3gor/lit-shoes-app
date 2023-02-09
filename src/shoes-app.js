@@ -139,6 +139,11 @@ class App extends router(LitElement)  {
 
   set theme(t) {
     this._theme = t
+
+    Object.keys(themes['common']).forEach(prop => {
+      this.style[prop] = themes['common'][prop]
+    })
+
     const themeToApply = themes[t];
     Object.keys(themeToApply).forEach(prop => {
       this.style.setProperty(prop, themeToApply[prop])
