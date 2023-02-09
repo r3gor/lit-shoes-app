@@ -13,7 +13,7 @@ export class AppFooter extends LitElement {
 
   render() {
     return html`
-      <footer>Shoes App - Lit Elements App</footer>
+      <footer>Softtek - Shoes App</footer>
     `
   }
 }

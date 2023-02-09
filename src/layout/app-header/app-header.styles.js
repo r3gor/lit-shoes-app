@@ -3,7 +3,7 @@ import {css} from 'lit-element';
 
 export default css`
   :host {
-    background-color: rgb(157 157 157);
+    background-color: var(--c-primary);
     display: flex;
     flex-direction: column;
     justify-content: center;

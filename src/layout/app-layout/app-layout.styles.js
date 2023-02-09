@@ -17,6 +17,8 @@ export default css`
 
   ::slotted([slot='main']) {
     flex-grow: 1;
+    background-color: var(--bg);
+    color: var(--text-primary);
   }
 
   ::slotted([slot='footer']) {

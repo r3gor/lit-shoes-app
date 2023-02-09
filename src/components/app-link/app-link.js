@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit-element';
+import { html, css, LitElement } from 'lit-element';
 import { navigator } from 'lit-element-router';
 
 class AppLink extends navigator(LitElement) {
@@ -6,6 +6,16 @@ class AppLink extends navigator(LitElement) {
     return {
       href: { type: String }
     };
+  }
+
+  static get styles() {
+    return [
+      css`
+        a {
+          color: var(--text-primary);
+        }
+      `
+    ]
   }
 
   constructor() {
