@@ -5,6 +5,7 @@ import { router } from 'lit-element-router';
 
 import './main.js';
 import './components/app-link/app-link.js';
+import './components/app-spinner/app-spinner';
 import './components/app-theme-switch/app-theme-switch';
 import './pages/app-catalog-page/app-catalog-page'
 import './pages/app-details-page/app-details-page'

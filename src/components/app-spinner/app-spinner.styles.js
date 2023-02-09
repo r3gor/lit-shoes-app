@@ -34,15 +34,6 @@ import {css} from 'lit-element';
 // `
 
 export default css`
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background: black;
-  }
-
   :host {
     --primary-color: white;
 
@@ -91,5 +82,4 @@ export default css`
       transform: rotate(1turn);
     }
   }
-
 `
