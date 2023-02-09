@@ -34,6 +34,7 @@ export class AppCatalogPage extends LitElement {
 
   async firstUpdated(_) {
     await this.fetchUsers()
+    console.log(this.calcFilters(this.items))
   }
 
   async fetchUsers() {
@@ -46,6 +47,35 @@ export class AppCatalogPage extends LitElement {
       .finally(_ => {
         this.completeLoading()
       });
+  }
+  calcFilters(items) {
+    const availableFilters = [
+      { key: "size", type: "choice" },
+      { key: "brand", type: "choice" },
+      { key: "color", type: "choice" },
+      { key: "price", type: "range" },
+      { key: "season", type: "choice" },
+      { key: "category", type: "choice" },
+    ]
+
+    return availableFilters.map(f => {
+      if (f.type == 'choice') {
+        const choices = new Set(items
+            .map(i => i[f.key])
+            .reduce((p, c) => c instanceof Array
+                ? [...p, ...c]
+                : [...p, c]
+              , [])
+        )
+        return { ...f, choices }
+      }
+      if (f.type == 'range') {
+        const values = items.map(i => i[f.key])
+        const min = Math.min(...values)
+        const max = Math.max(...values)
+        return { ...f, min, max }
+      }
+    })
   }
 
   addLoading() {
