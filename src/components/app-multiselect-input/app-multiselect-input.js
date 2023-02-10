@@ -20,8 +20,8 @@ export class AppMultiselectInput extends LitElement {
     this.placeholder = '';
     this.optionLabel = 'label';
     this.optionValue = 'value';
-    this.options = []
-    this.value = []
+    this.options = [];
+    this.value = [];
   }
 
   render() {
@@ -31,7 +31,7 @@ export class AppMultiselectInput extends LitElement {
         ${this.options.map(o => this.getOptionHTML(o))}
       </div>
       <!--   ONLY FOR DEBUG   -->
-      <pre>value: ${JSON.stringify(this.value)}</pre>
+       <pre>value: ${JSON.stringify(this.value)}</pre>
     `
   }
 
@@ -69,7 +69,7 @@ export class AppMultiselectInput extends LitElement {
     const isChecked = this.isOptionChecked(option);
     const v = this.getOptionValue(option);
     if (isChecked) {
-      this.value = [ ...this.value.filter(i => i != v) ];
+      this.value = [ ...this.value.filter(i => i !== v) ];
     } else {
       this.value = [ ...this.value, v ];
     }

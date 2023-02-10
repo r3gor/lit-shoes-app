@@ -75,6 +75,12 @@ class App extends router(LitElement)  {
       background-color: #000000a1;
       z-index: 9999999999;
     }
+
+    // Pages
+    [route] {
+      max-height: 100%;
+      overflow: auto;
+    }
   `;
 
   constructor() {
@@ -112,7 +118,7 @@ class App extends router(LitElement)  {
       <app-layout>
         <app-header slot='header'></app-header>
 
-        <app-main  slot='main' active-route=${this.route}>
+        <app-main slot='main' active-route=${this.route}>
           <h1 route='home'>Home</h1>
           <app-catalog-page
             route='catalog'

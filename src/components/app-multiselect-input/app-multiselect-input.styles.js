@@ -5,12 +5,20 @@ export default css`
   .label {
     text-transform: capitalize;
     font-weight: bold;
+    padding: 8px 0px;
+  }
+
+  .options-wrapper {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .option-wrapper {
     display: flex;
     gap: 8px;
     padding: 8px;
+    flex-grow: 1;
+    flex-basis: 0px;
   }
 
   .option-label {
@@ -30,6 +38,7 @@ export default css`
     font: inherit;
     color: currentColor;
     width: 1.15em;
+    min-width: 1.15em;
     height: 1.15em;
     border: 0.15em solid currentColor;
     border-radius: 0.15em;
