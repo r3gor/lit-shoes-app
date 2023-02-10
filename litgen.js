@@ -33,14 +33,14 @@ fs.writeFileSync(`${directory}/${tagname}.styles.js`, getBaseStyleComponent());
 
 function getBaseStyleComponent() {
   return `
-import {css} from 'lit-element';
+import { css } from 'lit-element';
 
 export default css\`\`
 `
 }
 function getBaseComponent(className, tagName) {
   return `
-import {html, LitElement} from 'lit-element';
+import { html, LitElement } from 'lit-element';
 import styles from './${tagName}.styles.js';
 
 export class ${className} extends LitElement {

@@ -4,6 +4,7 @@ import styles from './app-catalog-page.styles.js';
 import { getShoesCatalog } from '../../services/shoes.service.js';
 
 import "../../components/app-item-card/app-item-card";
+import "../../components/app-filter-panel/app-filter-panel"
 
 export class AppCatalogPage extends LitElement {
 
@@ -20,6 +21,7 @@ export class AppCatalogPage extends LitElement {
 
   render() {
     return html`
+      <app-filter-panel .filters='${this.calcFilters(this.items)}'></app-filter-panel>
       <div class='items-wrapper'>
         ${this.items.map(i => html`
           <app-item-card
