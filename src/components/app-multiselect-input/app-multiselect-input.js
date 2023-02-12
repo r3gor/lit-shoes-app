@@ -1,6 +1,7 @@
 
 import { html, LitElement } from 'lit-element';
 import styles from './app-multiselect-input.styles.js';
+import { DEBUG } from '../../config.js';
 
 export class AppMultiselectInput extends LitElement {
 
@@ -30,21 +31,25 @@ export class AppMultiselectInput extends LitElement {
       <div class='options-wrapper'>
         ${this.options.map(o => this.getOptionHTML(o))}
       </div>
-      <!--   ONLY FOR DEBUG   -->
-       <pre>value: ${JSON.stringify(this.value)}</pre>
+       ${this.getDebugHtml()}
     `
   }
 
-  // TODO: Separate in other component
+  getDebugHtml() {
+    return DEBUG
+      ? html`<pre>value: ${JSON.stringify(this.value)}</pre>`
+      : html``
+  }
+
   getOptionHTML(option) {
     const label = this.getOptionLabel(option)
-
     return html`
       <div class='option-wrapper'>
         <input
           type='checkbox'
           class='option-check'
           ?checked='${this.isOptionChecked(option)}'
+          .checked='${this.isOptionChecked(option)}'
           @change='${() => this.handleChangeCheck(option)}'
         />
         <div class='option-label'> ${label} </div>

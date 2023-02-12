@@ -6,76 +6,57 @@ import '../../components/app-item-card/app-item-card';
 import '../../components/app-filter-panel/app-filter-panel';
 import styles from './app-catalog-page.styles.js';
 import globalStyles from '../../styles/global.styles.js';
+import { makeFiltersParams } from '../../utils/filter.utils.js';
+
 
 export class AppCatalogPage extends LitElement {
 
   static styles = [ globalStyles, styles ];
   static properties = {
-    items: { type: Array },
-    filtersValue: { type: Object },
+    _items: { type: Array },
+    filteredItems: { type: Array }
   }
 
   constructor() {
     super()
-    this.items = [];
-    this.filtersValue = undefined;
+    this._items = [];
+  }
+
+  set items(v) {
+    this._items = v;
+    this.filterPanel.items = v;
   }
 
   render() {
     return html`
-
       <app-filter-panel
-        .value='${ifDefined(this.filtersValue)}'
-        .filters='${ifDefined(this.calcFilters(this.items))}'
         @change='${this.handleChangeFilters}'
       ></app-filter-panel>
 
       <div class='items-wrapper'>
-        ${this.filteredItems.map(i => html`
-          <app-item-card
-            .imgSrc="${i.image}"
-            .title="${i.name}"
-            .subtitle="${i.price}"
-          ></app-item-card>
-        `)}
+        ${
+          this.filteredItems?.length
+            ? this.filteredItems.map(i => html`
+            <app-item-card
+              .imgSrc="${i.image}"
+              .title="${i.name}"
+              .subtitle="${i.price}"
+            ></app-item-card>
+          `)
+            : html`No items`
+        }
       </div>
     `
   }
+
+  get filterPanel() { return this.renderRoot.querySelector("app-filter-panel"); }
 
   async firstUpdated(_) {
     await this.fetchUsers()
   }
 
-  handleChangeFilters({ detail: value }) {
-    this.filtersValue = value
-  }
-
-  get filteredItems() {
-    if (!this.filtersValue) return this.items
-
-    const predicateByType = {
-      "choice": (val, filterVal) => {
-        return val instanceof Array
-          ? val.some(v => filterVal.includes(v))
-          : filterVal.includes(val)
-      },
-      "range": (val, filterVal) =>
-        val >= filterVal.min &&
-        val <= filterVal.max,
-    }
-
-    return this.items.filter( i => {
-      const filterKeys = Object.keys(this.filtersValue)
-
-      return filterKeys.every(
-        key => {
-          const value = i[key]
-          const { type, value: filterValue } = this.filters[key]
-          const pred = predicateByType[type]
-          return pred(value, filterValue) // match or not
-        }
-      )
-    })
+  handleChangeFilters({ detail: filteredItems }) {
+    this.filteredItems = filteredItems
   }
 
   async fetchUsers() {
@@ -88,35 +69,6 @@ export class AppCatalogPage extends LitElement {
       .finally(_ => {
         this.completeLoading()
       });
-  }
-  calcFilters(items) {
-    const availableFilters = [
-      { key: "size", type: "choice" },
-      { key: "brand", type: "choice" },
-      { key: "color", type: "choice" },
-      { key: "price", type: "range" },
-      { key: "season", type: "choice" },
-      { key: "category", type: "choice" },
-    ]
-
-    return availableFilters.map(f => {
-      if (f.type == 'choice') {
-        const choices = Array.from(new Set(items
-            .map(i => i[f.key])
-            .reduce((p, c) => c instanceof Array
-                ? [...p, ...c]
-                : [...p, c]
-              , [])
-        ))
-        return { ...f, choices, "default": choices } // all selected by default
-      }
-      if (f.type == 'range') {
-        const values = items.map(i => i[f.key])
-        const min = Math.min(...values)
-        const max = Math.max(...values)
-        return { ...f, min, max, "default": { min, max } } // maximun range by default
-      }
-    })
   }
 
   addLoading() {

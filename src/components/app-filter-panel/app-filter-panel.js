@@ -4,57 +4,64 @@ import styles from './app-filter-panel.styles.js';
 
 import "../app-multiselect-input/app-multiselect-input"
 import globalStyles from '../../styles/global.styles.js';
+import { filtersApply, isFiltersZero, makeFiltersParams } from '../../utils/filter.utils.js';
+import { DEBUG } from '../../config.js';
+
+const AVAILABLE_FILTERS = [
+  { key: "size", type: "choice" },
+  { key: "brand", type: "choice" },
+  { key: "color", type: "choice" },
+  { key: "price", type: "range" },
+  { key: "season", type: "choice" },
+  { key: "category", type: "choice" },
+]
 
 export class AppFilterPanel extends LitElement {
 
   static styles = [ globalStyles, styles ];
   static properties = {
-    _filters: { type: Array },
+    filtersParams: { type: Array },
     _value: { type: Object },
   }
 
   constructor() {
     super()
-    this._filters = []
   }
 
-  set filters(f) {
-    this._filters = f
-    this.value = this.getDefaults(f)
+  set items(itemList) {
+    this._items = itemList
+    this.filtersParams = makeFiltersParams(AVAILABLE_FILTERS, itemList)
+    this.dispatchEvent(new CustomEvent('change', { detail: itemList }));
   }
 
   set value(v) {
     this._value = v
-    this.dispatchEvent(new CustomEvent('change', { detail: v }));
+    const filteredItems = filtersApply(this._items, this._value, this.filtersParams)
+    this.dispatchEvent(new CustomEvent('change', { detail: filteredItems }));
   }
 
   render() {
+    if (this.filtersParams === undefined) return html``
+
     return html`
-      <h2 class='title'> Filters </h2>
-      <pre>${ JSON.stringify(this._value, null, 2) }</pre>
+      <div class='title'>
+        <h2>Filters</h2>
+        ${ isFiltersZero(this.filtersParams, this._value)
+          ? html`No filters applied`
+          : html`<button @click='${this.cleanFilters}'>Clean Filters</button>`
+        }
+      </div>
+      ${this.getDebugHtml()}
       <div class='content'>
-        ${ this._filters.map(f => this.getInputHTML(f)) }
+        ${ this.filtersParams.map(f => this.getInputHTML(f)) }
       </div>
     `
   }
 
-  getDefaults(filters) {
-    const defaultByType = {
-      "choice": [],
-      "range": { min: 0, max: 0},
-    }
-
-    return filters.reduce(
-      (p, c) => {
-        const type = c.type
-        if (c.default !== undefined) {
-          const value = c.default
-          return { ...p, [c.key]: { value, type } }
-        } // else
-        const value = defaultByType[c.type]
-        return { ...p, [c.key]: { value, type } }
-      }, {}
-    )
+  getDebugHtml() {
+    return DEBUG
+      ? html`<pre>${ JSON.stringify(this._value, null, 2) }</pre>`
+      : html``
   }
 
   getInputHTML(f) {
@@ -68,15 +75,22 @@ export class AppFilterPanel extends LitElement {
   }
 
   getMultiselectHTML(f) {
-// <!--        .value='${this._value[f.key].value}'-->
+    const value =
+      this._value?.[f.key]?.value ||  // current value
+      f.initial // or initial value from filter params
+
     return html`
       <app-multiselect-input
         .label='${f.key}'
-        .value='${this._value[f.key].value}'
+        .value='${value}'
         .options='${f.choices}'
         @change='${({ detail: value }) => this.patchValue(f.key, f.type, value)}'
       ></app-multiselect-input>
     `
+  }
+
+  cleanFilters() {
+    this.value = undefined
   }
 
   patchValue(key, type, value) {
