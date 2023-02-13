@@ -7,6 +7,14 @@ class Main extends outlet(LitElement) {
       <slot></slot>
     `;
   }
+
+  setRouterContext(route, context) {
+    this.getPage(route).routeContext = context
+  }
+
+  getPage(pageRoute) {
+    return this.querySelector(`[route=${pageRoute}]`)
+  }
 }
 
 customElements.define('app-main', Main);

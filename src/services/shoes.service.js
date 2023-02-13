@@ -1,6 +1,6 @@
 import { API_SHOES, PRODUCTION } from '../config.js';
 
-const DELAY = PRODUCTION ? 0 : 2000
+const DELAY = PRODUCTION ? 0 : 1000
 
 export const getShoesCatalog = () => {
   const URL = `${API_SHOES}/shoes`

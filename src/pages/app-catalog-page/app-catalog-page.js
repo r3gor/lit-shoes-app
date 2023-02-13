@@ -7,9 +7,11 @@ import '../../components/app-filter-panel/app-filter-panel';
 import styles from './app-catalog-page.styles.js';
 import globalStyles from '../../styles/global.styles.js';
 import { makeFiltersParams } from '../../utils/filter.utils.js';
+import { CompBase } from '../../core/component-base.decorator.js';
+import { navigator } from 'lit-element-router';
 
 
-export class AppCatalogPage extends LitElement {
+export class AppCatalogPage extends CompBase(navigator(LitElement)) {
 
   static styles = [ globalStyles, styles ];
   static properties = {
@@ -27,6 +29,17 @@ export class AppCatalogPage extends LitElement {
     this.filterPanel.items = v;
   }
 
+  set routeContext(context) {
+    // Se mueve el fetchItems a este método para que se ejecute siempre que se
+    // acceda a la ruta de este componente caso contrario no se hace la petición.
+    // Cuando navegando se vuelva a acceder a esta ruta se volvera a lanzar la petición
+    // La diferencia de llamarlo en el firstUpdated es que los datos es que en ese
+    // caso la peticion se hará así yo acceda a otra ruta distinta, lo cual no es eficiente
+    // y en caso navegue nunca tendre datos actualizados ya que siempre la petición solo se
+    // lanza al inicio y no con un cambio de ruta
+    this.fetchItems()
+  }
+
   render() {
     return html`
       <app-filter-panel
@@ -38,6 +51,7 @@ export class AppCatalogPage extends LitElement {
           this.filteredItems?.length
             ? this.filteredItems.map(i => html`
             <app-item-card
+              @click='${() => this.navigateItemDetails(i.id)}'
               .imgSrc="${i.image}"
               .title="${i.name}"
               .subtitle="${i.price}"
@@ -51,15 +65,15 @@ export class AppCatalogPage extends LitElement {
 
   get filterPanel() { return this.renderRoot.querySelector("app-filter-panel"); }
 
-  async firstUpdated(_) {
-    await this.fetchUsers()
+  navigateItemDetails(id) {
+    this.navigate(`/details/${id}`);
   }
 
   handleChangeFilters({ detail: filteredItems }) {
     this.filteredItems = filteredItems
   }
 
-  async fetchUsers() {
+  async fetchItems() {
     this.addLoading()
     this.items = await getShoesCatalog()
       .catch(err => {
@@ -69,14 +83,6 @@ export class AppCatalogPage extends LitElement {
       .finally(_ => {
         this.completeLoading()
       });
-  }
-
-  addLoading() {
-    this.dispatchEvent(new CustomEvent('add-loading'))
-  }
-
-  completeLoading() {
-    this.dispatchEvent(new CustomEvent('complete-loading'))
   }
 }
 

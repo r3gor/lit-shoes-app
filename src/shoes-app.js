@@ -1,7 +1,7 @@
 import {} from "@webcomponents/webcomponentsjs/webcomponents-loader.js";
 
 import { LitElement, html, css } from 'lit-element';
-import { router } from 'lit-element-router';
+import { navigator, router } from 'lit-element-router';
 
 import './main.js';
 import './components/app-link/app-link.js';
@@ -17,7 +17,7 @@ import themes from "./theme.js"
 import { DEFAULT_THEME } from './config.js';
 
 
-class App extends router(LitElement)  {
+class App extends router(navigator(LitElement))  {
   static get properties() {
     return {
       route: { type: String },
@@ -96,7 +96,14 @@ class App extends router(LitElement)  {
     this.route = route;
     this.params = params;
     this.query = query;
-    console.log(route, params, query, data);
+    console.log({ route, params, query })
+  }
+
+  updated(changedProperties) {
+    if (changedProperties && changedProperties.has('route')) {
+      const pageContext = { route: this.route, params: this.params, query: this.query }
+      this.mainOutlet.setRouterContext(this.route, pageContext)
+    }
   }
 
   render() {
@@ -120,21 +127,9 @@ class App extends router(LitElement)  {
 
         <app-main slot='main' active-route=${this.route}>
           <h1 route='home'>Home</h1>
-          <app-catalog-page
-            route='catalog'
-            @add-loading='${this.handleAddLoading}'
-            @complete-loading='${this.handleCompleteLoading}'
-          ></app-catalog-page>
-          <app-cart-page
-            route='cart'
-            @add-loading='${this.handleAddLoading}'
-            @complete-loading='${this.handleCompleteLoading}'
-          ></app-cart-page>
-          <app-details-page
-            @add-loading='${this.handleAddLoading}'
-            @complete-loading='${this.handleCompleteLoading}'
-            route='details'
-          ></app-details-page>
+          <app-catalog-page route='catalog'></app-catalog-page>
+          <app-cart-page route='cart'></app-cart-page>
+          <app-details-page route='details'></app-details-page>
           <h1 route='not-found'> :( This page does not exist. </h1>
         </app-main>
 
@@ -142,6 +137,30 @@ class App extends router(LitElement)  {
       </app-layout>
 
     `;
+  }
+
+  get mainOutlet() {
+    return this.renderRoot.querySelector("app-main")
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('add-loading', this.handleAddLoading);
+    this.addEventListener('complete-loading', this.handleCompleteLoading);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('add-loading', this.handleAddLoading);
+    this.removeEventListener('complete-loading', this.handleCompleteLoading);
+    super.disconnectedCallback();
+  }
+
+  handleAddLoading() {
+    this.loading++
+  }
+
+  handleCompleteLoading() {
+    this.loading--
   }
 
   set theme(t) {
@@ -155,14 +174,6 @@ class App extends router(LitElement)  {
     Object.keys(themeToApply).forEach(prop => {
       this.style.setProperty(prop, themeToApply[prop])
     })
-  }
-
-  handleAddLoading() {
-    this.loading++
-  }
-
-  handleCompleteLoading() {
-    this.loading--
   }
 }
 

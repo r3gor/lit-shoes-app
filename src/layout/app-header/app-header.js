@@ -18,7 +18,7 @@ export class AppHeader extends LitElement {
       <div>
         <app-link href="/">Home</app-link>
         <app-link href="/catalog">Catalog</app-link>
-        <app-link href="/details/14">Details</app-link>
+        <app-link href="/details/4">Details</app-link>
         <app-link href="/cart">Cart</app-link>
       </div>
 

@@ -2,6 +2,7 @@ import { css } from 'lit-element';
 export default css`
   :host {
     display: flex;
+    flex-direction: row;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -20,5 +21,13 @@ export default css`
   app-filter-panel, .items-wrapper {
     height: 100%;
     overflow: auto;
+  }
+
+  app-item-card {
+    cursor: pointer;
+  }
+
+  app-item-card:hover {
+    transform: scale(1.04);
   }
 `
