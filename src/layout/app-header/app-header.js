@@ -15,10 +15,10 @@ export class AppHeader extends LitElement {
 
   render() {
     return html`
-      <div>
+      <div style='display: flex; gap: 24px'>
         <app-link href="/">Home</app-link>
         <app-link href="/catalog">Catalog</app-link>
-        <app-link href="/details/4">Details</app-link>
+<!--        <app-link href="/details/4">Details</app-link>-->
         <app-link href="/cart">Cart</app-link>
       </div>
 
