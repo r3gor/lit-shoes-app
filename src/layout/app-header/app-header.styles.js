@@ -6,8 +6,8 @@ export default css`
     background-color: var(--c-primary);
     color: var(--text-primary);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
   }
 `

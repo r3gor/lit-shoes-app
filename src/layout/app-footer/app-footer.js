@@ -1,8 +1,9 @@
 
 import {html, LitElement} from 'lit-element';
 import styles from './app-footer.styles.js';
+import { CompBase } from '../../core/component-base.decorator.js';
 
-export class AppFooter extends LitElement {
+export class AppFooter extends CompBase(LitElement) {
 
   static styles = [ styles ];
   static properties = { }
@@ -15,6 +16,9 @@ export class AppFooter extends LitElement {
     return html`
       <footer>Softtek - Shoes App</footer>
     `
+  }
+
+  onAppStateChange(newState) {
   }
 }
 

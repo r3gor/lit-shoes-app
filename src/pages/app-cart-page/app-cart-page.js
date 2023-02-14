@@ -2,8 +2,9 @@
 import {html, LitElement} from 'lit-element';
 import styles from './app-cart-page.styles.js';
 import { getShoesCatalog } from '../../services/shoes.service.js';
+import { CompBase } from '../../core/component-base.decorator.js';
 
-export class AppCartPage extends LitElement {
+export class AppCartPage extends CompBase(LitElement) {
 
   static styles = [ styles ];
   static properties = {

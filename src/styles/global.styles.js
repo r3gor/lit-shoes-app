@@ -7,4 +7,12 @@ export default css`
   }
 
   ${customScrollbar}
+
+  button {
+    padding: 8px;
+    border-radius: 10px;
+    background-color: var(--c-primary-l);
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+  }
 `

@@ -28,6 +28,6 @@ export default css`
   }
 
   app-item-card:hover {
-    transform: scale(1.04);
+    //transform: scale(1.04);
   }
 `

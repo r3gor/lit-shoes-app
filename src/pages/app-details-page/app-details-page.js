@@ -5,6 +5,9 @@ import { CompBase } from '../../core/component-base.decorator.js';
 import { getShoesCatalog, getShoesItem } from '../../services/shoes.service.js';
 import globalStyles from '../../styles/global.styles.js';
 import { DEBUG } from '../../config.js';
+import appState from '../../services/app-state.service.js';
+import cartService from '../../services/cart-state.service.js';
+
 
 export class AppDetailsPage extends CompBase(LitElement) {
 
@@ -45,7 +48,10 @@ export class AppDetailsPage extends CompBase(LitElement) {
         <div class='resume'>
           <div class='subtitle'>${this.item.category}</div>
           <div class='title'>${this.item.name}</div>
-          <div class='actions'>${this.item.price}</div>
+          <div class='actions'>
+            ${this.item.price}
+            <button @click='${() => this.addToCart(this.item.id, 123)}'>Add to cart</button>
+          </div>
         </div>
         <img class='image-main' src='${this.item["image"]}'/>
         <div class='image-second'>
@@ -54,6 +60,10 @@ export class AppDetailsPage extends CompBase(LitElement) {
         </div>
       </div>
     `
+  }
+
+  addToCart(id, size) {
+    cartService.addItem(id, { size })
   }
 
   async fetchItem(id) {

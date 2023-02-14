@@ -1,8 +1,9 @@
 
 import {html, LitElement} from 'lit-element';
 import styles from './app-layout.styles.js';
+import { CompBase } from '../../core/component-base.decorator.js';
 
-export class AppLayout extends LitElement {
+export class AppLayout extends CompBase(LitElement) {
 
   static styles = [ styles ];
   static properties = { }

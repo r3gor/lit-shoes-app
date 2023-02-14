@@ -6,12 +6,14 @@ import '../../components/app-item-card/app-item-card';
 import '../../components/app-filter-panel/app-filter-panel';
 import styles from './app-catalog-page.styles.js';
 import globalStyles from '../../styles/global.styles.js';
-import { makeFiltersParams } from '../../utils/filter.utils.js';
 import { CompBase } from '../../core/component-base.decorator.js';
 import { navigator } from 'lit-element-router';
+import { CURRENCY_SYMBOL } from '../../config.js';
+import cartService from '../../services/cart-state.service.js';
+import favoritesService from '../../services/favorites-state.service.js';
 
 
-export class AppCatalogPage extends CompBase(navigator(LitElement)) {
+export class AppCatalogPage extends navigator(CompBase(LitElement)) {
 
   static styles = [ globalStyles, styles ];
   static properties = {
@@ -51,10 +53,13 @@ export class AppCatalogPage extends CompBase(navigator(LitElement)) {
           this.filteredItems?.length
             ? this.filteredItems.map(i => html`
             <app-item-card
-              @click='${() => this.navigateItemDetails(i.id)}'
+              @show-details='${() => this.navigateItemDetails(i.id)}'
+              @add-fav='${() => favoritesService.addItem(i.id)}'
+              @del-fav='${() => favoritesService.removeItem(i.id)}'
               .imgSrc="${i.image}"
               .title="${i.name}"
-              .subtitle="${i.price}"
+              .id='${i.id}'
+              .subtitle="${'' + i.price + ' ' + CURRENCY_SYMBOL}"
             ></app-item-card>
           `)
             : html`No items`
