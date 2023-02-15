@@ -5,10 +5,11 @@ import { CompBase } from '/src/core/component-base.decorator.js';
 import styles from './app-cart-item-card.styles.js';
 import { capitalizeStr } from '../../utils/operations.utils.js';
 import { CURRENCY_SYMBOL } from '../../config.js';
+import globalStyles from '../../styles/global.styles.js';
 
 export class AppCartItemCard extends CompBase(LitElement) {
 
-  static styles = [ styles ];
+  static styles = [ globalStyles, styles ];
   static properties = {
     item: { type: Object },
   }
