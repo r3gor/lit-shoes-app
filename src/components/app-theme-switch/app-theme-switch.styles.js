@@ -19,4 +19,8 @@ export default css`
   button img {
     width: 100%;
   }
+
+  button.dark {
+    padding: 10px; // badfix para que ambas imagenes tengan un tamano similar
+  }
 `

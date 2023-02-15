@@ -1,6 +1,6 @@
 const ICONS = {
   dark: 'https://www.svgrepo.com/show/187683/crescent-moon-moon.svg',
-  light: 'https://cdn-icons-png.flaticon.com/512/169/169367.png'
+  light: 'https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/75176/sun-icon-clipart-xl.png'
 }
 
 import {html, LitElement} from 'lit-element';
@@ -20,7 +20,7 @@ export class AppThemeSwitch extends LitElement {
   render() {
     if (!this.theme) return html``
     return html`
-      <button @click='${this.handleClick}'>
+      <button class='${this.theme}' @click='${this.handleClick}'>
         <img src='${this.getIcon()}'>
       </button>
     `
