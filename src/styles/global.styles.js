@@ -11,10 +11,13 @@ export default css`
   button {
     padding: 8px;
     border-radius: 10px;
-    background-color: var(--c-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--text-primary);
+    background-color: #1973B8;
+    color: white;
+    border: 2px solid var(--text-primary);
     cursor: pointer;
+    font-family: Rubik, sans-serif;;
+    padding: 8px 16px;
+    border-radius: 8px;
   }
 
   button:hover {

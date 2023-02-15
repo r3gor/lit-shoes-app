@@ -13,18 +13,37 @@ export default css`
     text-align: center;
   }
 
-  img {
+  img.main-img {
     padding: 16px;
+    border-bottom: 2px solid #80808069;
+  }
+
+  .resume {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    padding: 24px;
+    text-align: left;
+  }
+
+  .brand{
+    font-weight: lighter;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    line-height: 24px;
+    opacity: 0.8;
   }
 
   .title {
+    margin-top: 8px;
     font-size: 20px;
   }
 
   .subtitle {
     font-weight: bolder;
     color: var(--c-accent);
-    padding: 8px;
+    line-height: 36px;
   }
 
   .actions {
@@ -51,6 +70,14 @@ export default css`
     border-radius: unset;
     border: unset;
     cursor: pointer;
+    padding: 0px;
+  }
+
+  .actions img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 4px;
   }
 
   .actions button:hover {

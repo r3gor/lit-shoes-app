@@ -58,10 +58,7 @@ export class AppCatalogPage extends navigator(CompBase(LitElement)) {
               @show-details='${() => this.navigateItemDetails(i.id)}'
               @add-fav='${() => favoritesService.addItem(i.id)}'
               @del-fav='${() => favoritesService.removeItem(i.id)}'
-              .imgSrc="${i.image}"
-              .title="${i.name}"
-              .id='${i.id}'
-              .subtitle="${'' + i.price + ' ' + CURRENCY_SYMBOL}"
+              .item='${i}'
             ></app-item-card>
           `)
             : html`No items`

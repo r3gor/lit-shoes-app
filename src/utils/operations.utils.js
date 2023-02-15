@@ -16,8 +16,9 @@ export const getIntersection = (s1, s2) => {
  * @param {Any} o1
  * @param {Any} o2
  */
-export const deepCompare = (o1, o2) => {
-  return JSON.stringify()
+export const deepEqual = (o1, o2) => {
+  console.log({o1, o2, eq: JSON.stringify(o1) === JSON.stringify(o2)});
+  return JSON.stringify(o1) === JSON.stringify(o2)
 }
 
 export const capitalizeStr = (str) => {

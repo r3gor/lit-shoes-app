@@ -12,6 +12,7 @@ export class AppCartItemCard extends CompBase(LitElement) {
   static styles = [ globalStyles, styles ];
   static properties = {
     item: { type: Object },
+    qty: { type: Number },
   }
 
   constructor() {
@@ -41,7 +42,9 @@ export class AppCartItemCard extends CompBase(LitElement) {
           </div>
           <div class='price'>${item.price + ' ' + CURRENCY_SYMBOL}</div>
         </div>
-
+      </div>
+      <div class='bottom-actions'>
+        <div>Quantity: ${this.qty}</div>
       </div>
     `
   }

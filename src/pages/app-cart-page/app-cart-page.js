@@ -8,27 +8,39 @@ import "/src/components/app-cart-item-card/app-cart-item-card.js"
 import globalStyles from '../../styles/global.styles.js';
 import cartService from '../../services/cart-state.service.js';
 import { CURRENCY_SYMBOL } from '../../config.js';
+import { deepEqual } from '../../utils/operations.utils.js';
 
 export class AppCartPage extends CompBase(LitElement) {
 
   static styles = [ globalStyles, styles ];
   static properties = {
     items: { type: Object }, // dict
-    cart: { type: Array }
+    _cart: { type: Array },
   }
 
   set routeContext(context) {
-    this.fetchCartItems(this.cart)
+    this.fetchCartItems()
   }
 
-  async fetchCartItems(cart) {
-    const ids = this.cart?.map(i => i.id) || []
+  set cart(cartValue) {
+    const prevCart = this._cart
+    this._cart = cartValue
+    if (
+      document.URL.includes("cart") &&
+      !deepEqual(prevCart, cartValue)) {
+
+      this.fetchCartItems()
+    }
+  }
+
+  async fetchCartItems() {
+    const ids = this._cart?.map(i => i.id) || []
     const promises = ids.map(id => getShoesItem(id))
     this.addLoading()
     await Promise.all(promises)
       .then(items => {
         this.items = items.reduce((p, c) => {
-          const { details } = this.cart.find(i => i.id === c.id)
+          const { details } = this._cart.find(i => i.id === c.id)
           return {...p, [c.id]: {item: c, details}}
         }, {})
     }).catch(err => {
@@ -58,6 +70,7 @@ export class AppCartPage extends CompBase(LitElement) {
           Object.values(this.items || []).map(i => html`
             <app-cart-item-card
               .item='${i}'
+              .qty='${this.getQty(i.item.id)}'
               @delete-item='${({detail: {id}}) => cartService.removeItem(id)}'
             ></app-cart-item-card>
           `)
@@ -82,9 +95,13 @@ export class AppCartPage extends CompBase(LitElement) {
     `
   }
 
+  getQty(id) {
+    return this._cart.filter(i => i.id === id).length
+  }
+
   get productsQuantity() {
-    if (!this.cart) return 0
-    return Object.keys(this.cart).length
+    if (!this._cart) return 0
+    return Object.keys(this._cart).length
   }
 
   get cartTotalPrice() {
@@ -97,9 +114,7 @@ export class AppCartPage extends CompBase(LitElement) {
   }
 
   async onAppStateChange(state) {
-    if (!state) return
-    this.cart = state.cart
-    this.fetchCartItems(this.cart)
+    this.cart = state?.cart
   }
 }
 
