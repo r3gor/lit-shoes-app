@@ -14,7 +14,7 @@ export default css`
     z-index: 9999;
     top: 0;
     left: 0;
-    border-bottom: 8px solid var(--c-primary-l);
+    border-bottom: 4px solid var(--c-primary-d);
   }
 
   ::slotted([slot='main']) {

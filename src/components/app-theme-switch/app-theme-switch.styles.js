@@ -9,10 +9,11 @@ export default css`
     overflow: hidden;
     border: none;
     cursor: pointer;
-    background-color: var(--c-primary-l);
+    //background-color: var(--c-primary-l);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
   }
 
   button img {

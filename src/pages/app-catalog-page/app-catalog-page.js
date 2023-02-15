@@ -44,9 +44,11 @@ export class AppCatalogPage extends navigator(CompBase(LitElement)) {
 
   render() {
     return html`
-      <app-filter-panel
-        @change='${this.handleChangeFilters}'
-      ></app-filter-panel>
+      <div class='filter-wrapper'>
+        <app-filter-panel
+          @change='${this.handleChangeFilters}'
+        ></app-filter-panel>
+      </div>
 
       <div class='items-wrapper'>
         ${

@@ -16,11 +16,19 @@ export default css`
     justify-content: center;
     padding: 36px 24px;
     //margin: 36px 0;
-  }
-
-  app-filter-panel, .items-wrapper {
     height: 100%;
     overflow: auto;
+  }
+
+  .filter-wrapper {
+    height: 100%;
+    padding: 36px 24px 0px 0px;
+  }
+
+  .filter-wrapper app-filter-panel {
+    height: 100%;
+    overflow: auto;
+    border-radius: 0px 20px 0px 0px;
   }
 
   app-item-card {

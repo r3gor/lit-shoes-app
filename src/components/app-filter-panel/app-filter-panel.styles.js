@@ -6,7 +6,7 @@ export default css`
     width: 300px;
     display: flex;
     flex-direction: column;
-    background-color: var(--c-primary-l);
+    background-color: var(--bg-1);
   }
 
   .title {
@@ -14,11 +14,11 @@ export default css`
     top: 0px;
     left: 0px;
     width: 100%;
-    background-color: var(--c-primary-l);
+    background-color: var(--bg-1);
     z-index: 99;
     padding: 16px;
     margin: 0px;
-    border-bottom: 1px solid var(--text-primary);
+    border-bottom: 4px solid var(--bg);
   }
 
   .content {
@@ -26,5 +26,6 @@ export default css`
     display: flex;
     flex-direction: column;
     gap: 24px;
+    overflow: auto;
   }
 `

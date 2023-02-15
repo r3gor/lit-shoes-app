@@ -9,5 +9,8 @@ export default css`
     align-items: center;
     flex-direction: row;
     justify-content: space-around;
+    background-color: #072146;
+    color: white;
+    --color: white;
   }
 `

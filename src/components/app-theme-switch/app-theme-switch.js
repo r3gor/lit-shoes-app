@@ -1,5 +1,5 @@
 const ICONS = {
-  dark: 'https://cdn-icons-png.flaticon.com/512/196/196685.png',
+  dark: 'https://www.svgrepo.com/show/187683/crescent-moon-moon.svg',
   light: 'https://cdn-icons-png.flaticon.com/512/169/169367.png'
 }
 

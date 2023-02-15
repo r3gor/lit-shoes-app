@@ -12,7 +12,7 @@ class AppLink extends navigator(LitElement) {
     return [
       css`
         a {
-          color: var(--text-primary);
+          color: var(--color);
         }
       `
     ]
