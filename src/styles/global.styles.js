@@ -15,4 +15,9 @@ export default css`
     color: var(--text-primary);
     border: 1px solid var(--text-primary);
   }
+
+  button:disabled,
+  button[disabled] {
+    background-color: gray;
+  }
 `

@@ -5,6 +5,10 @@ class StateService{
   constructor(key, eventKey) {
     this.key = STATE_PREFIX + '_' + key;
     this.eventKey = STATE_PREFIX + '_' + eventKey;
+    let loadedState = localStorage.getItem(this.key)
+    if (loadedState === null) return
+    loadedState = JSON.parse(loadedState)
+    this.setState(loadedState)
   }
 
   getState() {
@@ -14,6 +18,7 @@ class StateService{
   setState(state) {
     window[this.key] = state;
     window.dispatchEvent(new CustomEvent(this.eventKey, { detail: state }));
+    localStorage.setItem(this.key, JSON.stringify(state))
   }
 
   patchState(props) {

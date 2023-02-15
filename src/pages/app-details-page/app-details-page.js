@@ -14,6 +14,7 @@ export class AppDetailsPage extends CompBase(LitElement) {
   static styles = [ globalStyles, styles ];
   static properties = {
     item: { type: Object },
+    size: { type: Number },
   }
 
   constructor() {
@@ -22,6 +23,7 @@ export class AppDetailsPage extends CompBase(LitElement) {
 
   set routeContext(context) {
     this.item = undefined
+    this.size = undefined
     const { params: { id } } = context
     this.fetchItem(id)
   }
@@ -50,7 +52,14 @@ export class AppDetailsPage extends CompBase(LitElement) {
           <div class='title'>${this.item.name}</div>
           <div class='actions'>
             ${this.item.price}
-            <button @click='${() => this.addToCart(this.item.id, 123)}'>Add to cart</button>
+            <label for="size">Size:</label>
+            <select @change='${this.handleChangeSize}' name="size" id="size">
+              <option>-</option>
+              ${this.item.size.map(s => html`
+                <option value="${s}">${s}</option>
+              `)}
+            </select>
+            <button ?disabled='${this.size===undefined}' @click='${() => this.addToCart(this.item.id, this.size)}'>Add to cart</button>
           </div>
         </div>
         <img class='image-main' src='${this.item["image"]}'/>
@@ -60,6 +69,17 @@ export class AppDetailsPage extends CompBase(LitElement) {
         </div>
       </div>
     `
+  }
+
+  get selectSize() { return this.renderRoot.querySelector("#size") }
+
+  handleChangeSize() {
+    const value = this.selectSize.value
+    if (value=='-') {
+      this.size = undefined
+      return
+    }
+    this.size = parseInt(value)
   }
 
   addToCart(id, size) {

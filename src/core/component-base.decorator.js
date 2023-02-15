@@ -24,6 +24,7 @@ export function CompBase(litBase) {
 
       // Solo si el método fue sobreescrito en la clase concreta se anade el listener
       if (this.onAppStateChange) {
+        this.onAppStateChange(appState.getState())
         window.addEventListener(appState.eventKey, this.__COMP_BASE_handleStateChanges.bind(this))
       }
     }
