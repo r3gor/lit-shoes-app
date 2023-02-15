@@ -6,6 +6,7 @@ import { CompBase } from '../../core/component-base.decorator.js';
 
 import "/src/components/app-cart-item-card/app-cart-item-card.js"
 import globalStyles from '../../styles/global.styles.js';
+import cartService from '../../services/cart-state.service.js';
 
 export class AppCartPage extends CompBase(LitElement) {
 
@@ -16,11 +17,11 @@ export class AppCartPage extends CompBase(LitElement) {
   }
 
   set routeContext(context) {
-    const ids = this.cart?.map(i => i.id) || []
-    this.fetchCartItems(ids)
+    this.fetchCartItems(this.cart)
   }
 
-  async fetchCartItems(ids) {
+  async fetchCartItems(cart) {
+    const ids = this.cart?.map(i => i.id) || []
     const promises = ids.map(id => getShoesItem(id))
     this.addLoading()
     await Promise.all(promises)
@@ -48,6 +49,7 @@ export class AppCartPage extends CompBase(LitElement) {
           Object.values(this.items || []).map(i => html`
             <app-cart-item-card
               .item='${i}'
+              @delete-item='${({detail: {id}}) => cartService.removeItem(id)}'
             ></app-cart-item-card>
           `)
         }
@@ -75,13 +77,17 @@ export class AppCartPage extends CompBase(LitElement) {
 
   get cartTotalPrice() {
     if (!this.items) return 0
-    return Object.values(this.items).reduce(
+    const DECIMALS_POS = 2
+    const price = Object.values(this.items).reduce(
       (p, c) => p + c.item?.price
-    , 0)
+      , 0)
+    return Math.round(price * DECIMALS_POS) / DECIMALS_POS
   }
 
-  async onAppStateChange({ cart, favorites }) {
-    this.cart = cart
+  async onAppStateChange(state) {
+    if (!state) return
+    this.cart = state.cart
+    this.fetchCartItems(this.cart)
   }
 }
 

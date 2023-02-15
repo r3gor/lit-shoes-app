@@ -25,7 +25,7 @@ export class AppCartItemCard extends CompBase(LitElement) {
 
     return html`
       <div class='top-actions'>
-        <button>Delete</button>
+        <button @click='${() => this.deleteItem(item.id)}'>Delete</button>
       </div>
       <div class='priority'>
         <a><img src='${item.image}'></a>
@@ -44,6 +44,10 @@ export class AppCartItemCard extends CompBase(LitElement) {
 
       </div>
     `
+  }
+
+  deleteItem(id) {
+    this.dispatchEvent(new CustomEvent('delete-item', { detail: {id} }))
   }
 }
 

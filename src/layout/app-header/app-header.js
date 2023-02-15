@@ -36,7 +36,9 @@ export class AppHeader extends CompBase(LitElement) {
   }
 
 
-  onAppStateChange({ cart, favorites }) {
+  onAppStateChange(state) {
+    if (!state) return
+    const { cart, favorites } = state
     this.cart = cart
     this.favorites = favorites
   }
