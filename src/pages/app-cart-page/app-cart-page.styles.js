@@ -33,5 +33,11 @@ export default css`
   .order-resume__row {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .order-resume__row .total {
+    margin-top: 36px;
+    font-size: 24px;
   }
 `

@@ -7,6 +7,7 @@ import { CompBase } from '../../core/component-base.decorator.js';
 import "/src/components/app-cart-item-card/app-cart-item-card.js"
 import globalStyles from '../../styles/global.styles.js';
 import cartService from '../../services/cart-state.service.js';
+import { CURRENCY_SYMBOL } from '../../config.js';
 
 export class AppCartPage extends CompBase(LitElement) {
 
@@ -44,6 +45,14 @@ export class AppCartPage extends CompBase(LitElement) {
 
   render() {
     return html`
+      ${this.itemsContentHtml}
+      ${this.OrderResumeHtml}
+    `
+  }
+
+  get itemsContentHtml() {
+    if (!this.items) return html`No items`
+    return html`
       <div class='items-wrapper'>
         ${
           Object.values(this.items || []).map(i => html`
@@ -53,8 +62,12 @@ export class AppCartPage extends CompBase(LitElement) {
             ></app-cart-item-card>
           `)
         }
-
       </div>
+    `
+  }
+
+  get OrderResumeHtml() {
+    return html`
       <div class='order-resume'>
         <h3>Order: </h3>
         <div class='order-resume__row'>
@@ -63,10 +76,9 @@ export class AppCartPage extends CompBase(LitElement) {
         </div>
         <div class='order-resume__row'>
           <div class='label'>Total</div>
-          <div class='value'>${ this.cartTotalPrice }</div>
+          <div class='value total'>${ this.cartTotalPrice + ' ' + CURRENCY_SYMBOL }</div>
         </div>
       </div>
-<!--  <pre>${JSON.stringify(this.items, null, 2)}</pre>-->
     `
   }
 
@@ -81,7 +93,7 @@ export class AppCartPage extends CompBase(LitElement) {
     const price = Object.values(this.items).reduce(
       (p, c) => p + c.item?.price
       , 0)
-    return Math.round(price * DECIMALS_POS) / DECIMALS_POS
+    return price.toFixed(DECIMALS_POS);
   }
 
   async onAppStateChange(state) {
