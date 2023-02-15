@@ -4,8 +4,8 @@ export default {
     "fontFamily": "'Rubik', sans-serif",
   },
   light: {
-    "--bg": "white",
-    "--bg-1": "#cecece",
+    "--bg": "#EEEEEE",
+    "--bg-1": "#FFFFFF",
     "--c-primary": "#81d4fa",
     "--c-primary-l": "#b6ffff",
     "--c-primary-d": "#4ba3c7",

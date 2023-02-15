@@ -19,3 +19,7 @@ export const getIntersection = (s1, s2) => {
 export const deepCompare = (o1, o2) => {
   return JSON.stringify()
 }
+
+export const capitalizeStr = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

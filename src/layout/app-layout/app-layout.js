@@ -2,10 +2,11 @@
 import {html, LitElement} from 'lit-element';
 import styles from './app-layout.styles.js';
 import { CompBase } from '../../core/component-base.decorator.js';
+import globalStyles from '../../styles/global.styles.js';
 
 export class AppLayout extends CompBase(LitElement) {
 
-  static styles = [ styles ];
+  static styles = [ globalStyles, styles ];
   static properties = { }
 
   constructor() {

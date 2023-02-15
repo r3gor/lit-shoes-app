@@ -4,10 +4,11 @@ import styles from './app-header.styles.js';
 
 import '../../components/app-link/app-link'
 import { CompBase } from '/src/core/component-base.decorator.js';
+import globalStyles from '../../styles/global.styles.js';
 
 export class AppHeader extends CompBase(LitElement) {
 
-  static styles = [ styles ];
+  static styles = [ globalStyles, styles ];
   static properties = {
     cart: { type: Array },
     favorites: { type: Array },

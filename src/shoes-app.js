@@ -15,6 +15,7 @@ import "./layout/app-header/app-header"
 import "./layout/app-footer/app-footer"
 import themes from "./theme.js"
 import { DEFAULT_THEME } from './config.js';
+import globalStyles from './styles/global.styles.js';
 
 
 class App extends router(navigator(LitElement))  {
@@ -49,6 +50,8 @@ class App extends router(navigator(LitElement))  {
   }
 
   static styles = css`
+    ${ globalStyles }
+
     :host {
       min-height: 100vh;
       display: flex;
