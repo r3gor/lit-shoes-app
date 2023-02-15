@@ -41,9 +41,11 @@ export default css\`\`
 function getBaseComponent(className, tagName) {
   return `
 import { html, LitElement } from 'lit-element';
+import { CompBase } from '/src/core/component-base.decorator.js';
+
 import styles from './${tagName}.styles.js';
 
-export class ${className} extends LitElement {
+export class ${className} extends CompBase(LitElement) {
 
   static styles = [ styles ];
   static properties = { }
@@ -55,6 +57,10 @@ export class ${className} extends LitElement {
   render() {
     return html\`<p>component ${tagName} works!</p>\`
   }
+
+  // onAppStateChange(newState) {
+  // Listen state changes here, delete if not use app state
+  // }
 }
 
 customElements.define('${tagName}', ${className});

@@ -3,8 +3,7 @@ import {html, LitElement} from 'lit-element';
 import styles from './app-header.styles.js';
 
 import '../../components/app-link/app-link'
-import appState from '../../services/app-state.service.js';
-import { CompBase } from '../../core/component-base.decorator.js';
+import { CompBase } from '/src/core/component-base.decorator.js';
 
 export class AppHeader extends CompBase(LitElement) {
 
