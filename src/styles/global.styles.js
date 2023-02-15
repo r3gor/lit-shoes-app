@@ -21,7 +21,7 @@ export default css`
   }
 
   button:hover {
-    background-color: var(--c-primary-l);
+    font-weight: bolder;
   }
 
   button:disabled,

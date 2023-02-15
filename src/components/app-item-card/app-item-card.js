@@ -25,15 +25,19 @@ export class AppItemCard extends CompBase(LitElement) {
 
   render() {
     return html`
-    <img class='main-img' src='${this._item.image}'>
+    ${this.favoriteButtonHtml}
+    <img
+      class='main-img'
+      src='${this._item.image}'
+      @click='${() => this.emit('show-details')}'
+    >
     <div class='resume'>
       <div class='brand'>${this._item.brand}</div>
       <div class='title'>${this._item.name}</div>
       <div class='subtitle'>${this._item.price + ' ' + CURRENCY_SYMBOL}</div>
     </div>
-    <div class='actions'>
-      <button @click='${() => this.emit('show-details')}'>Show details</button>
-      ${this.favoriteButtonHtml}
+    <div class='actions show-hover'>
+      <button @click='${() => this.emit('show-details')}'>Add Cart</button>
     </div>
     `
   }
@@ -41,11 +45,11 @@ export class AppItemCard extends CompBase(LitElement) {
   get favoriteButtonHtml() {
     return this.isFavorite
       ? html`
-        <button class='button-fav' @click='${() => this.emit('del-fav')}'>
+        <button class='button-fav-on show-hover' @click='${() => this.emit('del-fav')}'>
           <img src='https://www.iconpacks.net/icons/1/free-heart-icon-431-thumb.png'>
         </button>`
       : html `
-        <button class='button-fav' @click='${() => this.emit('add-fav')}'>
+        <button class='button-fav-off show-hover' @click='${() => this.emit('add-fav')}'>
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Heart_empty_font_awesome.svg/768px-Heart_empty_font_awesome.svg.png'>
         </button>`
   }

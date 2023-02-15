@@ -11,11 +11,19 @@ export default css`
     //box-shadow: 1px 4px 6px var(--c-shadow);
     border-radius: 10px;
     text-align: center;
+    position: relative;
   }
 
   img.main-img {
+    width: 100%;
     padding: 16px;
     border-bottom: 2px solid #80808069;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+  }
+
+  :host(:hover) img.main-img {
+    padding: 4px;
   }
 
   .resume {
@@ -48,7 +56,6 @@ export default css`
 
   .actions {
     display: flex;
-    opacity: 0;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -59,7 +66,11 @@ export default css`
     margin-top: auto;
   }
 
-  :host(:hover) .actions {
+  .show-hover {
+    opacity: 0;
+  }
+
+  :host(:hover) .show-hover {
     opacity: 1;
   }
 
@@ -82,6 +93,23 @@ export default css`
 
   .actions button:hover {
     font-weight: bolder;
+  }
+
+  button.button-fav-off {
+    filter: opacity(0.5);
+  }
+
+  button.button-fav-on,
+  button.button-fav-off{
+    opacity: 0;
+    width: 36px;
+    background-color: transparent;
+    padding: 0px;
+    border: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 8px;
   }
 
   :host img {

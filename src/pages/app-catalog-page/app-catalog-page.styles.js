@@ -11,11 +11,10 @@ export default css`
   .items-wrapper {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(206px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(220px, auto));
     gap: 48px;
     justify-content: center;
     padding: 36px 24px;
-    //margin: 36px 0;
     height: 100%;
     overflow: auto;
   }
@@ -29,13 +28,5 @@ export default css`
     height: 100%;
     overflow: auto;
     border-radius: 0px 20px 0px 0px;
-  }
-
-  app-item-card {
-    cursor: pointer;
-  }
-
-  app-item-card:hover {
-    //transform: scale(1.04);
   }
 `
