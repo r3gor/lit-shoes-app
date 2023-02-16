@@ -101,7 +101,6 @@ export default css`
 
   button.button-fav-on,
   button.button-fav-off{
-    opacity: 0;
     width: 36px;
     background-color: transparent;
     padding: 0px;
@@ -112,7 +111,25 @@ export default css`
     margin: 8px;
   }
 
+  button.button-cart {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: transparent;
+    width: 49px;
+    height: 50px;
+    border: none;
+    margin: 8px;
+    padding: 6px;
+    border-radius: 50%;
+    filter: brightness(0.5);
+  }
+
   :host img {
     width: 100%;
+  }
+
+  .gopay-btn {
+    background-color: #028484;
   }
 `

@@ -27,6 +27,11 @@ class CartService {
       curr.filter(i => i.id != id)
     )
   }
+
+  isInCart(id) {
+    const curr = this.getValue()
+    return curr.some(i => i.id === id)
+  }
 }
 
 const cartService = new CartService()

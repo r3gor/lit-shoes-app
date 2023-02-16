@@ -8,14 +8,10 @@ export default css`
     overflow: hidden;
   }
 
-  .items-wrapper {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, auto));
-    gap: 48px;
-    justify-content: center;
+  .gallery-wrapper {
     padding: 36px 24px;
     height: 100%;
+    width: 100%;
     overflow: auto;
   }
 

@@ -4,6 +4,7 @@ import { getShoesCatalog } from '../../services/shoes.service.js';
 
 import '../../components/app-item-card/app-item-card';
 import '../../components/app-filter-panel/app-filter-panel';
+import '../../components/app-gallery-items/app-gallery-items';
 import styles from './app-catalog-page.styles.js';
 import globalStyles from '../../styles/global.styles.js';
 import { CompBase } from '../../core/component-base.decorator.js';
@@ -13,7 +14,7 @@ import cartService from '../../services/cart-state.service.js';
 import favoritesService from '../../services/favorites-state.service.js';
 
 
-export class AppCatalogPage extends navigator(CompBase(LitElement)) {
+export class AppCatalogPage extends CompBase(LitElement) {
 
   static styles = [ globalStyles, styles ];
   static properties = {
@@ -50,19 +51,10 @@ export class AppCatalogPage extends navigator(CompBase(LitElement)) {
         ></app-filter-panel>
       </div>
 
-      <div class='items-wrapper'>
-        ${
-          this.filteredItems?.length
-            ? this.filteredItems.map(i => html`
-            <app-item-card
-              @show-details='${() => this.navigateItemDetails(i.id)}'
-              @add-fav='${() => favoritesService.addItem(i.id)}'
-              @del-fav='${() => favoritesService.removeItem(i.id)}'
-              .item='${i}'
-            ></app-item-card>
-          `)
-            : html`No items`
-        }
+      <div class='gallery-wrapper'>
+        <app-gallery-items
+          .items='${this.filteredItems}'
+        ></app-gallery-items>
       </div>
     `
   }

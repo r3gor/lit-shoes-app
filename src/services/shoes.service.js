@@ -2,6 +2,7 @@ import { API_SHOES, DEBUG_DELAY_MS, PRODUCTION } from '../config.js';
 
 const DELAY = PRODUCTION ? 0 : DEBUG_DELAY_MS
 
+// TODO: Agregar cache a esta peticion...
 export const getShoesCatalog = () => {
   const URL = `${API_SHOES}/shoes`
 

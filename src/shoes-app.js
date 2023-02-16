@@ -10,6 +10,7 @@ import './components/app-theme-switch/app-theme-switch';
 import './pages/app-catalog-page/app-catalog-page'
 import './pages/app-details-page/app-details-page'
 import './pages/app-cart-page/app-cart-page'
+import './pages/app-home-page/app-home-page'
 import './layout/app-layout/app-layout'
 import "./layout/app-header/app-header"
 import "./layout/app-footer/app-footer"
@@ -129,7 +130,7 @@ class App extends router(navigator(LitElement))  {
         <app-header slot='header'></app-header>
 
         <app-main slot='main' active-route=${this.route}>
-          <h1 route='home'>Home</h1>
+          <app-home-page route='home'></app-home-page>
           <app-catalog-page route='catalog'></app-catalog-page>
           <app-cart-page route='cart'></app-cart-page>
           <app-details-page route='details'></app-details-page>

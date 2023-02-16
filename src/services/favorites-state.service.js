@@ -19,19 +19,19 @@ class CartService {
     const alreadyExists = this.isFavorite(id)
     if (alreadyExists) return // ignore update if already exist
     this.setValue(
-      [...curr, { id, details }]
+      [...curr, id]
     )
   }
 
   isFavorite(id) {
     const curr = this.getValue() || []
-    return curr.some( i => i.id == id )
+    return curr.some( i => i == id )
   }
 
   removeItem(id) {
     const curr = this.getValue()
     curr && this.setValue(
-      curr.filter(i => i.id != id)
+      curr.filter(i => i != id)
     )
   }
 }
