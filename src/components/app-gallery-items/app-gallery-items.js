@@ -24,18 +24,14 @@ export class AppGalleryItems extends navigator(CompBase(LitElement)) {
     return html`
       ${this.items.map(i => html`
           <app-item-card
-            @show-details='${() => this.navigate('cart')}'
-            @show-cart='${() => this.navigateItemDetails(i.id)}'
+            @show-details='${() => this.navigate(`/details/${i.id}`)}'
+            @show-cart='${() => this.navigate('cart')}'
             @add-fav='${() => favoritesService.addItem(i.id)}'
             @del-fav='${() => favoritesService.removeItem(i.id)}'
             .item='${i}'
           ></app-item-card>
       `)}
     `
-  }
-
-  navigateItemDetails(id) {
-    this.navigate(`/details/${id}`);
   }
 
   // onAppStateChange(newState) {
