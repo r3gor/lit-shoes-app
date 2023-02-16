@@ -29,7 +29,7 @@ class CartService {
   }
 
   isInCart(id) {
-    const curr = this.getValue()
+    const curr = this.getValue() || []
     return curr.some(i => i.id === id)
   }
 }

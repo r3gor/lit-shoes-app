@@ -36,7 +36,7 @@ export class AppHomePage extends CompBase(LitElement) {
       <h3>My cart</h3>
       ${ cartItems && cartItems.length > 0
         ? html`<app-gallery-items .items='${cartItems}'></app-gallery-items>`
-        : html`${this.noFavsHtml}`
+        : html`${this.noCartHtml}`
       }
     `
   }
@@ -45,6 +45,16 @@ export class AppHomePage extends CompBase(LitElement) {
     return html`
       <div>
         You have no favorites added.
+        <br>
+        <app-link href='catalog'>Go to catalog</app-link>
+      </div>
+    `
+  }
+
+  get noCartHtml() {
+    return html`
+      <div>
+        You currently have no items in your cart.
         <br>
         <app-link href='catalog'>Go to catalog</app-link>
       </div>
