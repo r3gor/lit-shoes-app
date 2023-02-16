@@ -48,7 +48,7 @@ export class AppFilterPanel extends LitElement {
         <h2>Filters</h2>
         ${ isFiltersZero(this.filtersParams, this._value)
           ? html`No filters applied`
-          : html`<button @click='${this.cleanFilters}'>Clean Filters</button>`
+          : html`<button @click='${this.cleanFilters}'>Clean</button>`
         }
       </div>
       ${this.getDebugHtml()}

@@ -5,6 +5,7 @@ import "/src/components/app-gallery-items/app-gallery-items.js"
 
 import styles from './app-home-page.styles.js';
 import { getShoesCatalog } from '../../services/shoes.service.js';
+import 'fa-icons';
 
 export class AppHomePage extends CompBase(LitElement) {
 

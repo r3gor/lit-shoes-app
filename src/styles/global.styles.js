@@ -16,7 +16,7 @@ export default css`
     border: 2px solid var(--text-primary);
     cursor: pointer;
     font-family: Rubik, sans-serif;;
-    padding: 8px 16px;
+    padding: 12px 24px;
     border-radius: 8px;
   }
 

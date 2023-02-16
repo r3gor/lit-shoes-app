@@ -13,4 +13,11 @@ export default css`
     color: white;
     --color: white;
   }
+
+  .title-app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
 `
