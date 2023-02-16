@@ -1,6 +1,5 @@
-<p align="center">
-  <img width="200" src="https://open-wc.org/hero.png"></img>
-</p>
+# Shoes App
+Deployed on: https://r3gor-urban-spoon-rp7755r7qqr25j6v-8000.preview.app.github.dev/
 
 ## Open-wc Starter App
 
