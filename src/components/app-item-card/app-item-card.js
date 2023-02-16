@@ -71,8 +71,8 @@ export class AppItemCard extends CompBase(LitElement) {
 
   get actionButtonHtml() {
     return this.isInCart
-      ? html`<button class='gopay-btn' @click='${() => this.emit('show-cart')}'>Go to pay</button>`
-      : html`<button class='godetails-btn' @click='${() => this.emit('show-details')}'>Add Cart</button>`
+      ? html`<button class='gopay-btn' @click='${() => this.emit('show-cart')}'>GO TO PAY</button>`
+      : html`<button class='godetails-btn' @click='${() => this.emit('show-details')}'>ADD TO CART</button>`
   }
 
   emit(event) {
