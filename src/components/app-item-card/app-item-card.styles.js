@@ -122,7 +122,7 @@ export default css`
     margin: 8px;
     padding: 6px;
     border-radius: 50%;
-    filter: brightness(0.5);
+    filter: brightness(0);
   }
 
   :host img {
