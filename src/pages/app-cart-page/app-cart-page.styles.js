@@ -40,4 +40,19 @@ export default css`
     margin-top: 36px;
     font-size: 24px;
   }
+
+  @media (max-width: 1100px) {
+    :host {
+      flex-direction: column;
+    }
+
+    .order-resume {
+      bottom: -2px;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      left: 0px;
+      margin: 0px;
+      box-shadow: -1px 22px 46px -5px var(--text-primary);
+    }
+  }
 `
