@@ -44,14 +44,34 @@ export class AppFilterPanel extends LitElement {
     if (this.filtersParams === undefined) return html``
 
     return html`
-      <div class='title'>
-        <h2>Filters</h2>
+      ${this.titleHtml}
+      ${this.getDebugHtml()}
+      ${this.contentFiltersHtml}
+    `
+  }
+
+  get titleHtml() {
+    const noFiltersApplied = isFiltersZero(this.filtersParams, this._value)
+
+    return html`
+      <div class='title' style='display: ${noFiltersApplied? 'block':'flex'}'>
+        <h2>
+          <fa-icon class="fas fa-filter" color="${this.color}" size='20px' ></fa-icon>
+          Filters
+        </h2>
         ${ isFiltersZero(this.filtersParams, this._value)
-          ? html`No filters applied`
-          : html`<button @click='${this.cleanFilters}'>Clean</button>`
+          ? html`<div>No filters applied</div>`
+          : html`
+            <button class='icon-btn' @click='${this.cleanFilters}' title='Clear filters'>
+              <fa-icon class="fas fa-broom" color="${this.color}" size='px' ></fa-icon>
+            </button>`
         }
       </div>
-      ${this.getDebugHtml()}
+    `
+  }
+
+  get contentFiltersHtml() {
+    return html`
       <div class='content'>
         ${ this.filtersParams.map(f => this.getInputHTML(f)) }
       </div>

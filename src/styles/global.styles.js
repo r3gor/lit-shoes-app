@@ -33,6 +33,12 @@ export default css`
     cursor: unset;
   }
 
+  .icon-btn {
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+  }
+
   input, select, option {
     padding: 8px;
     border: none;
@@ -51,6 +57,5 @@ export default css`
   .strong {
     font-weight: 500;
   }
-
 
 `

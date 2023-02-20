@@ -19,6 +19,16 @@ export default css`
     padding: 16px;
     margin: 0px;
     border-bottom: 4px solid var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title h2 {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .content {

@@ -56,7 +56,11 @@ export class AppDetailItemCard extends CompBase(LitElement) {
             </div>
           </div>
 
-          <button ?disabled='${this.size===undefined}' @click='${() => this.addToCart(this.item.id, this.size)}'>Add to cart</button>
+          <button
+          ?disabled='${this.size===undefined}'
+          @click='${() => this.addToCart(this.item.id, this.size)}'>
+            Add to cart
+          </button>
         </div>
 
         <div class='imgs'>
