@@ -20,13 +20,17 @@ export default css`
     border-radius: 8px;
   }
 
-  button:hover {
+  button:hover:not(
+    button:disabled,
+    button[disabled]
+  ) {
     font-weight: bolder;
   }
 
   button:disabled,
   button[disabled] {
-    background-color: gray;
+    opacity: 0.6;
+    cursor: unset;
   }
 
   input, select, option {

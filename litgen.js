@@ -43,11 +43,12 @@ function getBaseComponent(className, tagName) {
 import { html, LitElement } from 'lit-element';
 import { CompBase } from '/src/core/component-base.decorator.js';
 
+import globalStyles from '/src/styles/global.styles.js';
 import styles from './${tagName}.styles.js';
 
 export class ${className} extends CompBase(LitElement) {
 
-  static styles = [ styles ];
+  static styles = [ globalStyles, styles ];
   static properties = { }
 
   constructor() {

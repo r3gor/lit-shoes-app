@@ -49,7 +49,7 @@ export class AppCartItemCard extends CompBase(LitElement) {
           <div class='brand'>${item.brand}</div>
           <div class='code'>Code: ${item.id}</div>
           <div class='name'>${item.name}</div>
-          <div class='by'>Sell by: ShoesApp</div>
+          <div class='by'>Sell by: Softtek</div>
           <div class='color-size'>
             Color: <span>${capitalizeStr(item.color)}</span>
             |
