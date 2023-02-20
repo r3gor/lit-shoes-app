@@ -22,12 +22,27 @@ export class AppCartItemCard extends CompBase(LitElement) {
   render() {
     if (!this.item) return html``
 
+    return html`
+      ${this.topActionsHtml}
+      ${this.priorityAreaHtml}
+      ${this.bottomActionsHtml}
+    `
+  }
+
+  get topActionsHtml() {
     const { item, details } = this.item;
 
     return html`
       <div class='top-actions'>
         <button @click='${() => this.deleteItem(item.id)}'>Delete</button>
       </div>
+    `
+  }
+
+  get priorityAreaHtml() {
+    const { item, details } = this.item;
+
+    return html`
       <div class='priority'>
         <a><img src='${item.image}'></a>
         <div class='priority__details'>
@@ -43,6 +58,13 @@ export class AppCartItemCard extends CompBase(LitElement) {
           <div class='price'>${item.price + ' ' + CURRENCY_SYMBOL}</div>
         </div>
       </div>
+    `
+  }
+
+  get bottomActionsHtml() {
+    const { item, details } = this.item;
+
+    return html`
       <div class='bottom-actions'>
         <div>Quantity: ${this.qty}</div>
       </div>

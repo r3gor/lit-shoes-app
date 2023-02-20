@@ -15,7 +15,7 @@ export default css`
     color: white;
     border: 2px solid var(--text-primary);
     cursor: pointer;
-    font-family: Rubik, sans-serif;;
+    font-family: Rubik, sans-serif;
     padding: 12px 24px;
     border-radius: 8px;
   }
@@ -28,4 +28,25 @@ export default css`
   button[disabled] {
     background-color: gray;
   }
+
+  input, select, option {
+    padding: 8px;
+    border: none;
+    margin: 2px;
+    border-radius: 5px;
+    font-family: Rubik, sans-serif;
+  }
+
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .strong {
+    font-weight: 500;
+  }
+
+
 `

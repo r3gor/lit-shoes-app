@@ -7,7 +7,7 @@ import globalStyles from '../../styles/global.styles.js';
 import { DEBUG } from '../../config.js';
 import appState from '../../services/app-state.service.js';
 import cartService from '../../services/cart-state.service.js';
-
+import "/src/components/app-detail-item-card/app-detail-item-card.js"
 
 export class AppDetailsPage extends CompBase(LitElement) {
 
@@ -46,43 +46,14 @@ export class AppDetailsPage extends CompBase(LitElement) {
   getItemDetailHtml() {
     if (this.item === undefined) return
     return html`
-      <div class='item-detail'>
-        <div class='resume'>
-          <div class='subtitle'>${this.item.category}</div>
-          <div class='title'>${this.item.name}</div>
-          <div class='actions'>
-            ${this.item.price}
-            <label for="size">Size:</label>
-            <select @change='${this.handleChangeSize}' name="size" id="size">
-              <option>-</option>
-              ${this.item.size.map(s => html`
-                <option value="${s}">${s}</option>
-              `)}
-            </select>
-            <button ?disabled='${this.size===undefined}' @click='${() => this.addToCart(this.item.id, this.size)}'>Add to cart</button>
-          </div>
-        </div>
-        <img class='image-main' src='${this.item["image"]}'/>
-        <div class='image-second'>
-          <img src='${this.item["image-side"]}'/>
-          <img src='${this.item["image-behind"]}'/>
-        </div>
-      </div>
+      <app-detail-item-card
+      .item='${this.item}'
+      @add-cart='${({detail}) => this.handleAddToCart(detail)}'
+      ></app-detail-item-card>
     `
   }
 
-  get selectSize() { return this.renderRoot.querySelector("#size") }
-
-  handleChangeSize() {
-    const value = this.selectSize.value
-    if (value=='-') {
-      this.size = undefined
-      return
-    }
-    this.size = parseInt(value)
-  }
-
-  addToCart(id, size) {
+  handleAddToCart({id, size}) {
     cartService.addItem(id, { size })
   }
 
