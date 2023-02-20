@@ -20,4 +20,9 @@ export default css`
     align-items: center;
     gap: 16px;
   }
+
+  app-badge {
+    cursor: pointer;
+    margin-right: 24px;
+  }
 `
