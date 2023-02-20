@@ -58,4 +58,8 @@ export default css`
     font-weight: 500;
   }
 
+  .danger-bg {
+    background-color: rgb(220 39 39);
+  }
+
 `

@@ -69,4 +69,8 @@ export default css`
     max-width: 110px;
     height: auto;
   }
+
+  .bottom-actions {
+    text-align: end;
+  }
 `

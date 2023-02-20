@@ -6,6 +6,7 @@ import styles from './app-cart-item-card.styles.js';
 import { capitalizeStr } from '../../utils/operations.utils.js';
 import { CURRENCY_SYMBOL } from '../../config.js';
 import globalStyles from '../../styles/global.styles.js';
+import "fa-icons"
 
 export class AppCartItemCard extends CompBase(LitElement) {
 
@@ -34,7 +35,9 @@ export class AppCartItemCard extends CompBase(LitElement) {
 
     return html`
       <div class='top-actions'>
-        <button @click='${() => this.deleteItem(item.id)}'>Delete</button>
+        <button class='icon-btn danger-bg' @click='${() => this.deleteItem(item.id)}'>
+          <fa-icon class="fas fa-trash" color="${this.color}" size='16px' ></fa-icon>
+        </button>
       </div>
     `
   }
